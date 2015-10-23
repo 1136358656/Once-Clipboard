@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatClipboard extends Migration
+class CreateImages extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,15 @@ class CreatClipboard extends Migration
      */
     public function up()
     {
-        Schema::create('clipboard', function (Blueprint $table) {
+        Schema::create('images', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('hash')->unique();
-            $table->text('content');
+            $table->string('filename');
+            $table->string('post');
             $table->integer('try');
             $table->boolean('viewed');
             $table->timestamps();
         });
+        DB::statement("ALTER TABLE images ADD imagedata LONGBLOB");
     }
 
     /**
@@ -29,6 +30,6 @@ class CreatClipboard extends Migration
      */
     public function down()
     {
-        Schema::drop('clipboard');
+        Schema::drop('images');
     }
 }

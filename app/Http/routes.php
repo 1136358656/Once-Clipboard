@@ -13,7 +13,11 @@
 
 Route::get('/', function () {
     return view('welcome');
+    //return "/";
 });
-Route::get('/view', function () {
-    return view('welcome');
+Route::any('/controller', function () {
+    return \App\Http\Controllers\UEditorController::HandleRequest();
+});
+Route::get('/view/{id}', function ($id) {
+    echo \App\Http\Controllers\ImageController::GetImage($id);
 });
